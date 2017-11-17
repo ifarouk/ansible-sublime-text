@@ -1,0 +1,13 @@
+---
+- name: "Download sublimetext's pkg key"
+  apt_key:
+    url: "{{sublime_gpg_key}}"
+    state: present
+
+- name: Add sublimetext
+  shell: echo "deb {{ sublime_version }}" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+
+- name: Install sublime text
+  apt:
+    name: sublime-text
+    update_cache: yes
